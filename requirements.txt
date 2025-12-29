@@ -1,0 +1,18 @@
+import requests
+
+SERVER_URL = "https://hybrid-miner-server.onrender.com"  # твой URL Render
+
+username = input("Введите имя пользователя: ")
+
+# регистрация
+r = requests.post(f"{SERVER_URL}/register?username={username}")
+print("Регистрация:", r.json())
+
+# отправка хэшрейта
+hashrate = float(input("Введите хэшрейт: "))
+r = requests.post(f"{SERVER_URL}/send_hashrate", json={"username": username, "hashrate": hashrate})
+print("Отправка хэшрейта:", r.json())
+
+# получение баланса
+r = requests.get(f"{SERVER_URL}/get_balance/{username}")
+print("Баланс:", r.json())
